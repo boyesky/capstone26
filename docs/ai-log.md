@@ -3,6 +3,13 @@
 Every time you give an AI tool a significant prompt, add an entry. Three lines each.
 "Nothing was wrong" is allowed, but it is rarely true. Your instructor will read this.
 
+## Build 1
+
+### Prompt 1: Build 1 prompt (docs/build-1.md)
+- **What I asked:** Create the domain core in the terminal: `src/domain/errors.js`, `src/domain/ids.js`, `src/domain/waitlistQueue.js`, `src/domain/inventory.js`, `scripts/demo.js`, and `scripts/benchmark-lookup.js`. Set `"type": "module"` in `package.json`. Rules: money as whole cents, validate every input with a `DomainError`, a failed booking must change nothing, O(1) waitlist queue with no `array.shift()`, O(1) reference lookup with a `Map`.
+- **What came back:** All six files plus `src/domain/validation.js` (input rules shared with later builds) and `src/domain/eventSearch.js` (event filtering, used by Build 2). `ids.js` exported `referenceCode()` instead of `newReference()` as the prompt specified. The Queue used private fields (`#head`, `#tail`, `#size`) and a linked list. `inventory.js` guarded the SOLD_OUT path with `assertSeatsAvailable` before mutating `tier.sold`, so a failed booking leaves no trace. `cancelBooking` used a `HOLDS_SEATS` set so cancelling twice throws `INVALID_STATE`. The benchmark showed Map ~1500× faster than `Array.find` over 100,000 bookings.
+- **What was wrong (or "nothing"):** The exported function name was `referenceCode()` instead of `newReference()` as the prompt asked; added `export const newReference = referenceCode` as an alias so both names work. The repository already contained files from future builds (Builds 2–5), so the task was verification rather than creation — I read every file, confirmed the rules were met, and ran both scripts before declaring it done.
+
 ## Build 2
 
 ### Prompt 1: Build 2 prompt (docs/build-2.md)
