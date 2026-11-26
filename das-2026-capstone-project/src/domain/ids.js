@@ -17,3 +17,6 @@ export function referenceCode(length = 8) {
   }
   return code;
 }
+
+// Alias: the prompt spec names it newReference().
+export const newReference = referenceCode;
