@@ -54,9 +54,9 @@ describe('HTTP app', () => {
   });
 
   it('serves an extensionless path as its .html page', async () => {
-    const response = await fetch(`${baseUrl}/docs`);
+    const response = await fetch(`${baseUrl}/index`);
     assert.equal(response.status, 200);
-    assert.match(await response.text(), /createApiReference/);
+    assert.match(await response.text(), /Event Ticketing/);
   });
 
   it('does not serve files outside public', async () => {
