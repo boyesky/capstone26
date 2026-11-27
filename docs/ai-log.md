@@ -13,14 +13,14 @@ Every time you give an AI tool a significant prompt, add an entry. Three lines e
 ## Build 2
 
 ### Prompt 1: Build 2 prompt (docs/build-2.md)
-- **What I asked:**
-- **What came back:**
-- **What was wrong (or "nothing"):**
+- **What I asked:** Implement Build 2: `src/domain/sorting.js` (`mergeSort`), `publishEvent` and `listEventSummaries` in `src/domain/inventory.js`, `src/domain/eventSearch.js` (`filterEvents`, `sortEvents`, `searchEvents`), `node:test` acceptance tests for S02–S06 in `test/`, and the `npm test` script in `package.json`.
+- **What came back:** Verified the existing `sorting.js`, `eventSearch.js`, `publishEvent`, `listEventSummaries`, and `package.json` `"test"` script. Added `unpublishEvent(store, eventId)` to `src/domain/inventory.js` and created `test/build2.test.js` with 52 acceptance tests covering S02, S03, S04 (publish & unpublish), S05, and S06, including immutability, sort stability, empty lists, and all error codes (`VALIDATION`, `NOT_FOUND`, `INVALID_STATE`, `SOLD_OUT`).
+- **What was wrong (or "nothing"):** `unpublishEvent` was missing from `src/domain/inventory.js`, and the existing domain tests (`sorting.test.js`, `eventSearch.test.js`, `inventory.test.js`) missed several `docs/build-2.md` criteria (S04 unpublish/republish/idempotent publish, S03 `NOT_FOUND`, S02 no-save on failure). `unpublishEvent` sets status back to `'draft'` because the domain only defines `'draft'` and `'published'` (a separate `'unpublished'` status could be introduced later). Also, `test/build2.test.js` simulates editing an unpublished event by mutating `event.title` directly because there is no `editEvent` function in `inventory.js`.
 
-### Prompt 2:
-- **What I asked:**
-- **What came back:**
-- **What was wrong (or "nothing"):**
+### Prompt 2: Run "Done when" checks and log results
+- **What I asked:** Run the "Done when" checks in `docs/build-2.md` (`npm test`, verify search/filter/sort immutability and acceptance criteria) and update `docs/ai-log.md`.
+- **What came back:** Ran the full `npm test` suite: all 193 tests across 39 suites passed (0 failures).
+- **What was wrong (or "nothing"):** Nothing — all checks in "Done when" pass.
 
 ## Build 3
 

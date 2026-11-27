@@ -86,6 +86,16 @@ export function publishEvent(store, eventId) {
   return event;
 }
 
+// Removes the event from the public list while keeping all its data and bookings intact.
+export function unpublishEvent(store, eventId) {
+  const event = getEvent(store, eventId);
+  if (event.status !== 'published') {
+    throw new DomainError('INVALID_STATE', `Only a published event can be unpublished (current status: ${event.status})`);
+  }
+  event.status = 'draft';
+  return event;
+}
+
 // What the public event list is built from. Drafts are hidden unless asked for.
 export function listEventSummaries(store, { publishedOnly = true } = {}) {
   return [...store.events.values()]

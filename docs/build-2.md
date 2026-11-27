@@ -1,12 +1,13 @@
 # Build 2: Event search, sorting, backlog, first tests
 
-*Week 5 of the course. Starts from the finished state of Build 1.*
+_Week 5 of the course. Starts from the finished state of Build 1._
 
 **You deliver:** search and filter events by text, city, date range and price; sort by date, price or availability using a merge sort you write yourself; the backlog written as user stories; your first automated tests.
 
 **You practise:** sorting algorithms, stability, Big O, Agile and Scrum, writing user stories with acceptance criteria.
 
 **Done when**
+
 - Search, filter and sort work and never change the original list.
 - Every user story you are building has acceptance criteria.
 - `npm test` runs and passes.
@@ -36,7 +37,56 @@
 
 ### S04: As an organizer, I want to publish and unpublish an event, so that I control when it goes public
 
-*Written by you, in pairs, during the Build 2 class. Add your three criteria here before you paste the AI prompt below.*
+_Publishing an event_
+
+**Given** an event is saved as a draft,
+**When** the organizer clicks Publish,
+**Then** the event status should change from Draft to Published.
+**Given** an event has all required information,
+**When** the organizer publishes it,
+**Then** the event should become visible to the public.
+**Given** an event is missing required information,
+**When** the organizer attempts to publish it,
+**Then** the system should prevent publication and identify the missing fields.
+**Given** an event is published,
+**When** a user visits the public events page,
+**Then** the event should appear in the event listings.
+**Given** an event has been published,
+**When** the organizer views their dashboard,
+**Then** the event should display a Published status.
+**Given** an event is already published,
+**When** the organizer attempts to publish it again,
+**Then** the system should not create a duplicate event listing.
+
+_Unpublishing an event_
+
+**Given** an event is published,
+**When** the organizer clicks Unpublish,
+**Then** the event status should change to Unpublished.
+**Given** an event has been unpublished,
+**When** a visitor searches the public events page,
+**Then** the event should no longer appear in public listings.
+**Given** an event is unpublished,
+**When** a visitor accesses its public URL,
+**Then** the system should prevent public access to the event details.
+**Given** an event is unpublished,
+**When** an attendee attempts to purchase a ticket,
+**Then** the system should prevent new ticket purchases.
+**Given** an event is unpublished,
+**When** the organizer views their dashboard,
+**Then** the event should remain visible with an Unpublished status.
+**Given** an event has been unpublished,
+**When** the organizer clicks Publish again,
+**Then** the event should become publicly visible.
+**Given** an event has existing ticket purchases,
+**When** the organizer unpublishes it,
+**Then** previously purchased tickets should remain valid.
+**Given** an event has been unpublished,
+**When** the organizer republishes it,
+**Then** its existing event details and ticket configurations should be preserved.
+**Given** an event is unpublished,
+**When** the organizer updates its details,
+**Then** the changes should be saved without making the event publicly visible.
 
 ### S05: As an attendee, I want to search, filter and sort published events, so that I can find one I like
 
