@@ -11,6 +11,7 @@
     "start": "node src/server.js",
     "test": "node --test --test-reporter=spec",
     "demo": "node scripts/demo.js",
-    "benchmark": "node scripts/benchmark-lookup.js"
+    "benchmark": "node scripts/benchmark-lookup.js",
+    "export:openapi": "node scripts/export-openapi.js"
   }
 }

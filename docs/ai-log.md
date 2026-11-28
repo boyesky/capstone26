@@ -26,3 +26,11 @@ Every time you give an AI tool a significant prompt, add an entry. Three lines e
 - **What I asked:** Add the architecture diagrams (`docs/architecture.md`), booking state machine (`src/domain/bookingStateMachine.js`), Node HTTP router/server (`src/http/router.js`, `src/http/app.js`), configuration (`src/config.js`, `src/server.js`), `"start"` script in `package.json`, and `node:test` tests.
 - **What came back:** A layered architecture document, explicit booking transitions, static-file HTTP server, `/health` route, startup configuration, and `node:test` coverage.
 - **What was wrong (or "nothing"):** The first server draft relied on an implicit response/request property for HEAD handling and had redundant error-status logic; both were simplified. Added a regression test proving static requests cannot escape `public/`.
+
+## Build 4
+
+### Prompt 1: Build 4 prompt (docs/build-4.md)
+
+- **What I asked:** Build the in-memory REST API: `src/repositories/memory.js`, `src/services/eventService.js`, `src/services/bookingService.js` (reusing `src/domain/` rules), `src/lib/mockPaymentGateway.js`, API routes in `src/http/routes.js`, wiring in `src/server.js`, `docs/api-examples.md`, and `node:test` API tests on a free port (`test/api.test.js`).
+- **What came back:** All requested files plus convenience endpoints (`POST /api/events/:id/unpublish`, `GET /api/events/:id`, and `GET /api/bookings/:reference`) and 10 end-to-end API tests in `test/api.test.js`. `npm test` ran and all 106 tests across 25 suites passed.
+- **What was wrong (or "nothing"):** Nothing in the test run; rules decided explicitly: missing `x-user-id` returns `401 UNAUTHENTICATED`, accessing another user's event/booking returns `403 FORBIDDEN`, `venue` stays optional (defaulting to `''`), and `cancelBooking` rejects `paid` bookings with `409 INVALID_STATE` while already-cancelled bookings fail `assertTransition` with `409 INVALID_TRANSITION`. Known gap left for Build 5: concurrent `bookTickets` calls can read the same `tier.sold` before updating.
